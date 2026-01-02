@@ -1,20 +1,34 @@
 import time
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from hf_benchmark.device import get_device
 
-def profile_model(model_name, text):
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name)
+def profile_inference(fn, warmup=3, runs=5):
+    device = get_device()
+    
+    print(f"🔥 Warming up...")
+    for _ in range(warmup):
+        fn()
 
-    inputs = tokenizer(text, return_tensors="pt")
+    # Sync only if on GPU
+    if device.type == "cuda":
+        torch.cuda.synchronize()
 
-    # warmup
-    with torch.no_grad():
-        model.generate(**inputs, max_new_tokens=10)
+    latencies = []
+    print(f"🚀 Benchmarking ({runs} runs)...")
+    
+    for _ in range(runs):
+        start = time.time()
+        fn()
+        
+        # Sync only if on GPU (Crucial for accurate timing)
+        if device.type == "cuda":
+            torch.cuda.synchronize()
+            
+        latencies.append((time.time() - start) * 1000)
 
-    start = time.time()
-    with torch.no_grad():
-        model.generate(**inputs, max_new_tokens=50)
-    end = time.time()
-
-    print(f"Latency: {end - start:.2f}s")
+    latencies.sort()
+    return {
+        "p50": latencies[len(latencies)//2],
+        "p95": latencies[int(len(latencies)*0.95)],
+        "mean": sum(latencies) / len(latencies)
+    }
