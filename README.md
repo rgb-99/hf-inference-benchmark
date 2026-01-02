@@ -1,1 +1,22 @@
-# hf-inference-benchmark
+# HF Inference Benchmark
+
+![CI](https://github.com/rgb-99/hf-inference-benchmark/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+A production-grade CLI tool to benchmark the **Latency**, **Throughput**, and **Memory Usage** of Hugging Face models. Designed for engineers who need to know if a model will crash their production server.
+
+## Key Features
+* **Latency Profiling:** Measures P50, P95, and Average inference time.
+* **Throughput Metrics:** Calculates real-time generation speed (Tokens/sec).
+* **Memory Tracking:** Monitors peak RAM (CPU) or VRAM (GPU) usage.
+* **Device Agnostic:** Automatically detects and switches between `CUDA` (GPU) and `CPU`.
+* **Production Safe:** Handles warmup runs and GPU synchronization for accurate stats.
+
+## Installation
+
+**From Source (Developer Mode):**
+```bash
+git clone [https://github.com/rgb-99/hf-inference-benchmark.git](https://github.com/rgb-99/hf-inference-benchmark.git)
+cd hf-inference-benchmark
+pip install -e .
