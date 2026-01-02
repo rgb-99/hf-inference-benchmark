@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hf-inference-benchmark"
+version = "0.1.0"
+description = "Production-grade HuggingFace inference benchmarking tool"
+authors = [{ name = "Yuvraj" }]
+requires-python = ">=3.8"
+dependencies = [
+    "torch",
+    "transformers",
+    "psutil",
+    "tqdm"
+]
+
+[project.scripts]
+hf-bench = "hf_benchmark.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
