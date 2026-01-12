@@ -8,6 +8,11 @@
 
 A production-grade CLI tool to benchmark the **Latency**, **Throughput**, and **Memory Usage** of Hugging Face models. Designed for engineers who need to know if a model will crash their production server.
 
+## User Installation
+```bash
+pip install hf-inference-benchmark
+```  
+
 ## Key Features
 * **Latency Profiling:** Measures P50, P95, and Average inference time.
 * **Throughput Metrics:** Calculates real-time generation speed (Tokens/sec).
@@ -19,7 +24,10 @@ A production-grade CLI tool to benchmark the **Latency**, **Throughput**, and **
 
 **From Source (Developer Mode):**
 ```bash
+# Clone the repo
 git clone [https://github.com/rgb-99/hf-inference-benchmark.git](https://github.com/rgb-99/hf-inference-benchmark.git)
+
+# Install in editable mode
 cd hf-inference-benchmark
 pip install -e .
 ```
