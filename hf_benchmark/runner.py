@@ -13,4 +13,6 @@ def load_model(model_name):
 def run_once(model, tokenizer, device, prompt="Hello", max_new_tokens=32):
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
     with torch.no_grad():
-        model.generate(**inputs, max_new_tokens=max_new_tokens)
+        output = model.generate(**inputs, max_new_tokens=max_new_tokens)
+
+    return output.shape[-1] - inputs["input_ids"].shape[-1]
