@@ -8,11 +8,11 @@
 
 > Production-grade benchmarking infrastructure for HuggingFace inference workloads.
 
-`hf-inference-benchmark` is a **reproducible, device-agnostic benchmarking system** that measures the real operational cost of running LLMs — latency, throughput, and memory — under production-like conditions.
+`hf-inference-benchmark` is a **reproducible, device-agnostic benchmarking system** that measures the real operational cost of running LLMs - latency, throughput, and memory - under production-like conditions.
 
 It answers one critical question:
 
-> **“Will this model crash my server — and how fast can it actually run?”**
+> **“Will this model crash my server - and how fast can it actually run?”**
 
 ---
 
